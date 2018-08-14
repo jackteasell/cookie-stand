@@ -1,6 +1,13 @@
-.Salmon {
-  height: 100px;
-  align-content: center;
+
+thead {
+    box-sizing: border-box;
+}
+
+td, th, tr {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 10px;
+  text-align: center;
 }
 h1 {
+    text-align:center;
 }

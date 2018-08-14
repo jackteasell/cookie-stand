@@ -3,13 +3,32 @@
 
 <head>
   <title>Sales</title>
-  <script src="script.js"></script>
+  <h1>Sales by location:</h1>
 </head>
 
-<ul id="listId"></ul>
-
 <body>
+  <table>
+    <main class="container">
 
+      <tbody>
+        <section id="storeName" class="store"></section>
+      </tbody>
+    </main>
+  </table>
 </body>
+<footer>
+  <script src="app.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <form id="main-form">
+    <input name="name" type="text" placeholder="Name">
+    <input name="minCust" type="text" placeholder="Minimum Customers">
+    <input name="maxCust" type="text" placeholder="Maximum Customers">
+    <input name="avgSales" type="text" placeholder="Average Sales">
+
+    <button type="submit">submit</button>
+  </form>
+
+</footer>
 
 </html>
