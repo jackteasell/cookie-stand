@@ -17,22 +17,29 @@ var allhours = [
   "8pm"
 ];
 var storeArr = [];
-
+////////////////////////////Start of Functions//////////////////////////
 function customers(min, max) {
-  //generates random numbers for the amount of customers
-  return Math.random() * (max - min) + min;
+  var customersArr = [];
+  for (var i = 0; i < 15; i++) {
+    customersArr[i] = Math.random() * (max - min) + min;
+  }
+  return customersArr;
 }
+function genCookies(customers, avgSales) {
+  var cookiesArr = [];
+  for (var i = 0; i < allhours.length; i++) {
+    cookiesArr[i] = customers[i] * avgSales;
+  }
+  return cookiesArr;
+}
+/////////////////////////endFunctions///////////////////////////
+
 var firstAndPike = {
   name: "First and Pike",
   hours: allhours,
   minCustomers: 23,
   maxCustomers: 65,
   avgSales: 6.3,
-  genRandomCust: function() {
-    var customersArr = [];
-    for (var i = 0; i < this.hours.length; i++) {
-      customersArr[i] = customers(this.minCustomers, this.maxCustomers);
-    }
-    return customersArr;
-  }
+  customersByHour: customers(this.minCustomers, this.maxCustomers)
+  // numberOfCookies: genCookies(this.customersByHour, this.avgSales)
 };
