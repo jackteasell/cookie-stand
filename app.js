@@ -1,5 +1,5 @@
 'use strict';
-var allhours = [
+var ALLHOURS = [
   '6am',
   '7am',
   '8am',
@@ -14,16 +14,17 @@ var allhours = [
   '5pm',
   '6pm',
   '7pm',
-  '8pm'
+  '8pm',
+  'Total'
 ];
 var storeArr = [];
 
 //these arent stored in a variable because they are pushed and stored into storeArr.
-new CookieStore('1st and Pike', allhours, 23, 54, 6.3).calculateSales();
-new CookieStore('SeaTac Airport', allhours, 3, 24, 1.2).calculateSales();
-new CookieStore('Seattle Center', allhours, 11, 38, 3.7).calculateSales();
-new CookieStore('Capitol Hill', allhours, 20, 38, 2.3).calculateSales();
-new CookieStore('Alki', allhours, 2, 16, 4.6).calculateSales();
+new CookieStore('1st and Pike', ALLHOURS, 23, 54, 6.3).calculateSales();
+new CookieStore('SeaTac Airport', ALLHOURS, 3, 24, 1.2).calculateSales();
+new CookieStore('Seattle Center', ALLHOURS, 11, 38, 3.7).calculateSales();
+new CookieStore('Capitol Hill', ALLHOURS, 20, 38, 2.3).calculateSales();
+new CookieStore('Alki', ALLHOURS, 2, 16, 4.6).calculateSales();
 
 renderStores(storeArr);
 
@@ -38,8 +39,8 @@ function CookieStore(name, hours, minCustomers, maxCustomers, avgSales) {
   this.cookiesPerHour = [];
   this.dailyTotal = 0;
   this.calculateCustomers = function() {
-    for (var i = 0; i < this.hours.length; i++) {
-      var rand = customers(this.minCustomers, this.maxCustomers);
+    for (var i = 0; i < this.hours.length - 1; i++) {
+      var rand = randomCustomers(this.minCustomers, this.maxCustomers);
       this.customersPerHour.push(rand);
     }
   };
@@ -69,7 +70,7 @@ window.onload = function() {
 
     new CookieStore(
       name,
-      allhours,
+      ALLHOURS,
       minCust,
       maxCust,
       avgSales
@@ -79,13 +80,14 @@ window.onload = function() {
   });
 };
 
-function customers(min, max) {
+function randomCustomers(min, max) {
   //generates random numbers for the amount of customers
   return Math.random() * (max - min) + min;
 }
 
 function renderStores(cookiesArr) {
-  for (var j = 0; j < cookiesArr[0].hours.length; j++) {
+  var tableLength = cookiesArr[0].hours.length;
+  for (var j = 0; j < tableLength; j++) {
     //time cells on top of table
     var thEl = document.createElement('td');
     thEl.textContent = cookiesArr[0].hours[j] + ':';
@@ -93,7 +95,7 @@ function renderStores(cookiesArr) {
     if (j === 0) {
       //this puts in the blank cell at the upper left corner.
       var blank = document.createElement('td');
-      blank.textContent = ' ';
+      blank.textContent = '';
       mainEl.appendChild(blank);
     }
     mainEl.appendChild(thEl);
@@ -103,6 +105,7 @@ function renderStores(cookiesArr) {
     renderAStore(cookiesArr[i]);
   }
 }
+
 function renderAStore(store) {
   var trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
@@ -116,4 +119,7 @@ function renderAStore(store) {
     tdEl.textContent = store.cookiesPerHour[c];
     storeEl.appendChild(tdEl);
   }
+  tdEl = document.createElement('td');
+  tdEl.textContent = store.dailyTotal;
+  storeEl.appendChild(tdEl);
 }
