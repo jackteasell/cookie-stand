@@ -1,2 +1,4 @@
 # cookie-stand
-Its a cookie stand lab! 
+
+- Written by Jack Teasell
+- Updated to Day 9 lab
